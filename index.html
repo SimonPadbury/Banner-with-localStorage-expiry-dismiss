@@ -29,7 +29,7 @@
       }
 
       document.getElementById('banner-dismiss').addEventListener('click', function() {
-        // Plus expiry time in milliseconds, e.g. 12 hours = 43200000
+        // Plus expiry time in milliseconds, e.g. 12 hours = 1000ms * 60 * 60* 12 = 43200000ms
         // You can change this to e.g. 5 sec for testing purposes = 5000
         localStorage.setItem('bannerStorage', new Date().getTime() + 43200000)
         this.parentNode.style.display = "none"
