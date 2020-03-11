@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Banner Dismiss</title>
+  </head>
+  <body>
+
+    <div id="banner" style="background: lightgreen; padding: 1rem;">
+      This is a banner...
+      <span id="banner-dismiss" style="float: right;">[X]</span>
+    </div>
+
+    <p>The banner above can be dismissed for 12 hours. If you refresh the browser within that expiry time, the banner will not reappear. Refresh or revisit after 12 hours, and it will reappear.</p>
+
+    <script>
+      // ES6. Run all this through Babel if you need to support pre-2016 browsers.
+
+      let bannerStorage = localStorage.getItem('bannerStorage')
+      let nowDate = new Date().getTime()
+
+      if (bannerStorage > nowDate) {
+        // Expiry date is future — don't show banner
+        document.getElementById('banner').style.display = "none"
+      } else {
+        // Expiry date is past — do show banner
+        document.getElementById('banner').style.display = "block"
+      }
+
+      document.getElementById('banner-dismiss').addEventListener('click', function() {
+        // Plus expiry time in milliseconds, e.g. 12 hours = 43200000
+        // You can change this to e.g. 5 sec for testing purposes = 5000
+        localStorage.setItem('bannerStorage', new Date().getTime() + 43200000)
+        this.parentNode.style.display = "none"
+      });
+    </script>  
+
+  </body>
+</html>
